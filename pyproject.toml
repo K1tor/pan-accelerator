@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pan-accelerator"
+version = "1.0.0"
+description = "网盘直链多线程下载加速器：分块并发、断点续传、MD5 校验，支持百度网盘官方开放平台与任意直链"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.25",
+    "tqdm>=4.60",
+]
+
+[project.scripts]
+panacc = "pan_accel.cli:main"

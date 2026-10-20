@@ -15,3 +15,8 @@ dependencies = [
 
 [project.scripts]
 panacc = "pan_accel.cli:main"
+panacc-gui = "pan_accel.gui.app:main"
+
+[project.optional-dependencies]
+# 图形界面无额外依赖（tkinter 随 Python 提供），仅测试需要
+test = ["torf>=4.0"]

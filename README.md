@@ -39,6 +39,37 @@ scoop install aria2
 # 把 aria2c.exe 放到 ~/.panacc/bin/（panacc 会自动找到）
 ```
 
+## 图形界面（Material 3 Expressive）
+
+除了命令行，项目还带一个 **Android 17 风格**的桌面界面（tkinter 自绘，**零额外依赖**）：
+
+```bash
+python -m pan_accel.gui            # 直接启动
+python -m pan_accel.gui --light    # 浅色主题
+python -m pan_accel.gui --seed "#7C5CD6"   # 指定种子色（动态取色）
+python panacc-gui.py               # 免安装启动器
+```
+
+界面能力：
+
+- **下载中心**：直链 / `thunder://` / BT 磁力链统一入口，任务队列，逐块进度热图，实时速度与剩余时间
+- **统计页**：任务总数 / 进行中 / 完成 / 失败，累计进度与逐任务进度条
+- **外观页**：5 组种子色实时生成 M3 色调板、圆角阶梯预览、色彩角色对照
+- **设置页**：深色模式、完成后自动打开目录等开关
+
+设计要点（`pan_accel/gui/`）：
+
+| 文件 | 职责 |
+|---|---|
+| `tokens.py` | M3 tonal palette 生成、语义色彩角色、spring 缓动曲线、圆角阶梯 |
+| `widgets.py` | 自绘控件：圆角卡片、涟漪按钮、开关、滑块、导航栏、输入框、进度环、波形图 |
+| `tasks.py` | 任务状态模型（`Task` / `TaskState`）与滑动窗口测速 |
+| `runner.py` | 引擎适配层：包装现有下载器采集逐块进度，不改动 CLI 行为 |
+| `app.py` | 主窗口与四个页面 |
+
+> 视觉参考 Material Design 3 Expressive：大圆角、tonal 表面、state layer、spring 动效；
+> 配色由种子色按感知色调阶梯生成，明暗两套均通过 WCAG 对比度校验。
+
 ## 快速上手
 
 ### 方式一：浏览器直链导入（通用：夸克 / 百度 / 迅雷云盘 / 任意直链）
